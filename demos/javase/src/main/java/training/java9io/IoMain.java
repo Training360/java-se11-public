@@ -23,9 +23,10 @@ public class IoMain {
             throw new IllegalStateException("Can not read file", ioe);
         }
 
-        try {
-            InputStream is = IoMain.class.getResourceAsStream("/employees.txt");
-            OutputStream os = new BufferedOutputStream(new FileOutputStream("emps.txt"));
+        try (
+                InputStream is = IoMain.class.getResourceAsStream("/employees.txt");
+                OutputStream os = new BufferedOutputStream(new FileOutputStream("emps.txt"))
+        ) {
             is.transferTo(os);
         } catch (IOException ioe) {
             throw new IllegalStateException("Can not transfer", ioe);
